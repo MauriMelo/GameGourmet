@@ -65,13 +65,6 @@ export default class Gourmet {
       return Gourmet.isFood(food);
     }
 
-    // se não é semelhante porém tem outras comidas semelhantes
-    if (food.similar[this.indexSimilar]) {
-      const question = Gourmet.isSimilar(food.similar[this.indexSimilar]);
-      this.indexSimilar += 1;
-      return question;
-    }
-
     this.indexSimilar = 0;
     // se não possui mais comidas semelhantes então tenta encontrar nas comidas antecessores
     if (food.parent) {

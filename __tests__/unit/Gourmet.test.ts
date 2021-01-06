@@ -153,4 +153,20 @@ describe("Gourmet", () => {
 
     expect(question.food.similar.length).toBe(0);
   });
+
+  it("Possui comidas semelhantes com massa mas não é massa", () => {
+    const gourmet = new Gourmet();
+    let question = gourmet.init();
+    question = gourmet.answerIsSimilarFood(question.food, true); // é massa
+    question = gourmet.answerIsFood(question.food, false); // não é lasanha
+    Gourmet.pushSimilarFood(question.food, {
+      parent: question.food,
+      name: "Pizza",
+      type: "redonda",
+      similar: [],
+    }); // cadastra pizza
+
+    question = gourmet.answerIsSimilarFood(question.food, false); // não é massa
+    expect(question.food.name).toBe("Bolo de chocolate");
+  });
 });
